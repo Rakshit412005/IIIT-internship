@@ -137,7 +137,7 @@ The goal of this project is to develop an **intelligent, task-aware object detec
 
 ## Step 1: Static Image Object Detection using TFLite
 
-### 📂 Files Required:
+###  Files Required:
 
 * `ssd-mobilenet-v1-tflite-default-v1.tflite`
 * `coco_labels_dict.json`
@@ -179,7 +179,7 @@ for i in range(len(scores)):
 
 ## Step 2: Live Feed Object Detection
 
-### 🔌 Install dependencies:
+###  Install dependencies:
 
 ```bash
 pip install picamera2 opencv-python
@@ -209,7 +209,7 @@ cv2.destroyAllWindows()
 
 ## Step 3: Installing and Using LLM with llama.cpp
 
-### 📥 Installation:
+###  Installation:
 
 ```bash
 git clone https://github.com/ggerganov/llama.cpp
@@ -218,7 +218,7 @@ cmake -B build .
 cmake --build build -j4
 ```
 
-### 🧠 Install Python bindings:
+###  Install Python bindings:
 
 ```bash
 pip install llama-cpp-python
@@ -228,7 +228,7 @@ pip install llama-cpp-python
 
 ## Step 4: Use Phi-2 model for Task-Driven Object Detection
 
-### 📥 Download:
+###  Download:
 
 ```bash
 wget https://huggingface.co/microsoft/phi-2/resolve/main/phi-2.Q4_K_M.gguf
@@ -249,7 +249,7 @@ print(response['choices'][0]['text'])
 
 ## Step 5: Switching from Phi-2 to Gemma
 
-### 📥 Download with Hugging Face Token:
+###  Download with Hugging Face Token:
 
 ```bash
 wget --header="Authorization: Bearer <your_token>" \
@@ -280,7 +280,7 @@ gen_tokens = len(llm.tokenize(response['choices'][0]['text'].encode("utf-8")))
 
 # === Performance summary ===
         gen_tokens = len(llm.tokenize(raw.encode("utf-8")))
-        print("\n🧠 PERFORMANCE SUMMARY:")
+        print("\n PERFORMANCE SUMMARY:")
         print(f"• Load Duration:        {(end_load - start_load):.2f} sec")
         print(f"• Total LLM Time:       {(llm_end - llm_start):.2f} sec")
         print(f"• Prompt Tokens:        {prompt_tokens}")
@@ -372,7 +372,7 @@ picam2.preview_configuration.main.format = "RGB888"
 picam2.configure("preview")
 picam2.start()
 
-print("🔴 Live feed started. Press 's' to capture, 'q' to quit.")
+print(" Live feed started. Press 's' to capture, 'q' to quit.")
 
 while True:
     frame = picam2.capture_array()
@@ -417,17 +417,17 @@ while True:
                 bottom = int(ymax * frame.shape[0])
                 object_locations.append((label, left, top, right, bottom))
 
-        print("🧠 Detected objects:", detected_objects)
+        print(" Detected objects:", detected_objects)
 
         if not detected_objects:
-            print("⚠️ No high-confidence objects found.")
+            print("️ No high-confidence objects found.")
             continue
 
         try:
-            task_number = int(input("📝 Enter task number (1–14): "))
+            task_number = int(input(" Enter task number (1–14): "))
             task_name = tasks[task_number]
         except:
-            print("❌ Invalid task number.")
+            print(" Invalid task number.")
             continue
 
         # === Prompt construction ===
@@ -439,7 +439,7 @@ while True:
             f"No explanation. No code. Only output a list like this: ['knife', 'scissors']"
         )
 
-        print("\n📨 Prompt sent to LLM:\n", prompt)
+        print("\n Prompt sent to LLM:\n", prompt)
 
         # === LLM call
         llm_start = time.time()
@@ -447,7 +447,7 @@ while True:
         llm_end = time.time()
 
         raw_output = output['choices'][0]['text'].strip()
-        print("\n🧾 LLM Response:\n", raw_output)
+        print("\n LLM Response:\n", raw_output)
 
         # === Parse response safely
         try:
@@ -457,7 +457,7 @@ while True:
             else:
                 matched_list = []
         except Exception as e:
-            print("❌ Could not parse LLM output:", e)
+            print(" Could not parse LLM output:", e)
             matched_list = []
 
         # === Draw matched object boxes
@@ -471,17 +471,17 @@ while True:
 
         result_img = f"task_{task_number}_filtered_{timestamp}.jpg"
         cv2.imwrite(result_img, filtered_img)
-        print(f"\n📸 Saved filtered result: {result_img}")
+        print(f"\n Saved filtered result: {result_img}")
 
         # === Timing summary
         total_end = time.time()
-        print("\n⏱️ TIMING SUMMARY")
-        print(f"• 🧠 Object detection: {(det_end - det_start):.2f} sec")
-        print(f"• 🤖 LLM reasoning:    {(llm_end - llm_start):.2f} sec")
-        print(f"• ⏱️ Total time:       {(total_end - total_start):.2f} sec")
+        print("\n TIMING SUMMARY")
+        print(f"•  Object detection: {(det_end - det_start):.2f} sec")
+        print(f"•  LLM reasoning:    {(llm_end - llm_start):.2f} sec")
+        print(f"•  Total time:       {(total_end - total_start):.2f} sec")
 
     elif key == ord('q'):
-        print("👋 Exiting...")
+        print(" Exiting...")
         break
 
 cv2.destroyAllWindows()
@@ -491,7 +491,7 @@ cv2.destroyAllWindows()
 
 ## Step 8: Chain-of-Thought (CoT) Reasoning
 
-### ✨ CoT Prompt:
+###  CoT Prompt:
 ```python
 
 def generate_cot_prompt(task, object_list):
@@ -515,7 +515,7 @@ Let’s reason step by step.
     return prompt.strip()
 ```
 
-### 📥 `test10.py`:
+###  `test10.py`:
 
 ```python
 def get_affordance_reasoning(task, objects):
@@ -530,7 +530,7 @@ def get_affordance_reasoning(task, objects):
 
 ```python   
 ranked_objects.sort(reverse=True)
-print("\n🏆 Ranked Affordance Results:\n")
+print("\n Ranked Affordance Results:\n")
 for score, label, reason in ranked_objects:
     print(f"{label} (score {score}): {reason}")
 
@@ -551,9 +551,9 @@ for score, label, reason in ranked_objects:
  
   
 
-## ❌ Error Handling: FP16 Not Supported
+##  Error Handling: FP16 Not Supported
 
-### 🐛 Error:
+###  Error:
 
 ```bash
 llama_kv_cache_unified: fp16 not supported
