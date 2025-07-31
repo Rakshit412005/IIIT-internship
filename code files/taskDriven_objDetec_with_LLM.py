@@ -148,13 +148,14 @@ while True:
         print("✅ Relevant objects:", parsed)
 
         # === Performance Metrics ===
-        print("\n🧠 APPROXIMATE PERFORMANCE METRICS:")
-        print(f"• Load Duration:        {(end_load - start_load):.2f} sec")
-        print(f"• Total Duration:       {(llm_end - llm_start):.2f} sec")
-        print(f"• Prompt Tokens:        {prompt_tokens}")
-        print(f"• Generated Tokens:     {gen_tokens}")
-        print(f"• Prompt Eval Rate:     {prompt_tokens / (llm_end - llm_start):.2f} tokens/sec")
-        print(f"• Generation Eval Rate: {gen_tokens / (llm_end - llm_start):.2f} tokens/sec")
+        print("\n LLM PERFORMANCE METRICS:")
+        print(f"• Load Duration:          {(end_load - start_load):.2f} sec")
+        print(f"• Total Duration:         {(llm_end - llm_start):.2f} sec")
+        print(f"• Time to First Token:    {first_token_delay:.2f} sec")
+        print(f"• Prompt Tokens:          {prompt_tokens}")
+        print(f"• Generated Tokens:       {gen_tokens}")
+        print(f"• Prompt Eval Rate:       {prompt_tokens / (llm_end - llm_start):.2f} tokens/sec")
+        print(f"• Generation Eval Rate:   {gen_tokens / (llm_end - llm_start):.2f} tokens/sec")
 
     elif key == ord('q'):
         print("👋 Exiting...")
