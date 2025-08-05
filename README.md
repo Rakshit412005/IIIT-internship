@@ -585,7 +585,7 @@ A live system where:
 * LLM filters relevant objects.
 * LLM response time is logged.
 * Ranking can be applied.
-* Optional: Chain-of-Thought reasoning boosts accuracy
+* Optional: Chain-of-Thought reasoning boosts accuracy.
 
 ---
 
